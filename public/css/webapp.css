@@ -1,0 +1,25 @@
+
+/* iPhone X and Xs Max */
+@media only screen and (min-device-width: 375px) and (min-device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+    .navigation-bar
+    {
+        border-top: 1px solid var(--border-color);
+        height: 90px;
+        padding-bottom: 52px;
+    }
+}
+
+/* iPhone XR */
+@media only screen and (min-device-width: 414px) and (min-device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) {
+    .navigation-bar
+    {
+        border-top: 1px solid var(--border-color);
+        height: 90px;
+        padding-bottom: 52px;
+    }
+}
+
+
+@media all and (display-mode: standalone) {
+    
+}
