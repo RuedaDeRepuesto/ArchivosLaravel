@@ -7,6 +7,7 @@ class File {
 
     toDiv()
     {
+        //cambiar como se forma este div xsS???
         var ext="";
         if(this.icon =="icons/file.png")
         {
