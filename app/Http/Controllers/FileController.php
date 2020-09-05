@@ -16,7 +16,7 @@ class FileController extends Controller
 
 
     /**
-     * Get todos los archivos.
+     * Get todos tipos de archivos los archivos.
      *
      * @return \Illuminate\Http\JsonResponse
      */
