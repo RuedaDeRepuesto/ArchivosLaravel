@@ -15,6 +15,8 @@
   </head>
   <body style="background-image: url('{{ asset('img/catal.jpg') }}');">
 
+  <div class="app-root">
+  
     <nav class="navbar fixed-top navbar-app blurred-bg">
         <a class="navbar-brand" >Archivos</a>
         <div class="btn-group nav-bar-container">
@@ -48,9 +50,7 @@
     </div>
 
 
-    <div id="notification-panel">
-        
-    </div>
+    
 
     <!-- Opciones -->
     <div class="modal fade" id="modalOpciones" tabindex="-1" role="dialog" aria-labelledby="titulo" aria-hidden="true">
@@ -106,6 +106,30 @@
       </div>
     </div>
 
+  </div>
+  <div class="app-login">
+    <div id="login-box" class="login-box blurred-bg">
+    <h4>
+      Entrar en Archivos
+    </h4>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="userForm">Usuario</label>
+        <input type="email" class="form-control" name="userForm" id="userForm" aria-describedby="emailHelp" placeholder="Usuario">
+
+      </div>
+      <div class="form-group">
+        <label for="passForm">Contraseña</label>
+        <input type="password" class="form-control" name="passForm" id="passForm" placeholder="contraseña">
+      </div>
+      
+      <a id="submitForm" onclick="loginClick();" class="btn btn-app w-100 d-block">Entrar</a>
+    </form>
+    </div>
+  </div>
+  <div id="notification-panel">
+        
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ asset('js/jquery.js') }}">

@@ -1,8 +1,25 @@
 
     var upload_id=0;
+    var api_url='/api';
+
+    var Session = {logged:false,token:""};
 
 
-    
+    function main()
+    {
+        if(localStorage.getItem("token") ===null)
+        {
+            $(".app-login").show();
+        }
+        else
+        {
+            Session.logged=true;
+            Session.token=localStorage.getItem("token");
+            axios.defaults.headers.common = {'Authorization': `Bearer ${Session.token}`}
+            $(".app-root").show(250);
+            refreshFiles();
+        }
+    }
 
     function showMenu(e)
     {
@@ -82,7 +99,7 @@
             }
         }
         formData.append('file', file);
-        formData.append('token',bearer_token);
+        formData.append('token',Session.token);
 
 
         let div = $('<div class="notification blurred-bg"></div>').attr("data-upload-id",c_id);
@@ -143,29 +160,52 @@
 
     
 
-
-    /* Fake auth */
-    var bearer_token ='';
-    var api_url='/api';
-
-    function fakeLogin(){
-        
-        params = {
-            email: 'test@localhost.com',
-            password:'123456'
-        }
-        axios.post(api_url+'/auth/login',params).then( resp => {
-            debug(resp.data);
-            //showMessage('Bienvenido '+resp.data.user.name);
-            bearer_token = resp.data.access_token;
-            axios.defaults.headers.common = {'Authorization': `Bearer ${resp.data.access_token}`}
-            
-            refreshFiles();
-        }).catch(error => {
-            debug(error.response.data.error);
-            debug(error.response.data.message);
-            showError(error.response.data.message);
+    function loginClick()
+    {
+        var user= $("#userForm").val();
+        var pass = $("#passForm").val();
+        $("#login-form").hide();
+        login(user,pass).then( r =>{
+            if(r)
+            {
+                $(".app-login").hide(250, () => {
+                    $(".app-root").show(250);
+                });
+            }
+            $("#login-form").show();
         });
+    }
+
+
+    
+
+
+    async function login(user,pass){
+
+        if(Session.logged)
+        {
+            return false;
+        }
+
+        params = {
+            email: user,
+            password:pass
+        }
+        try
+        {
+            resp = await axios.post(api_url+'/auth/login',params);
+            Session.token = resp.data.access_token;
+            Session.logged=true;
+            localStorage.setItem("token", Session.token);
+            axios.defaults.headers.common = {'Authorization': `Bearer ${Session.token}`}
+            return true;
+        }
+        catch(error)
+        {
+            showError(error.response.data.message);
+            Session.logged=false;
+            return false;
+        }
     }
 
     function refreshFiles(){
@@ -193,7 +233,7 @@
 
     function openFile(id)
     {
-        var win = window.open($('.file[data-file-id="'+id+'"]').data("file-url")+"?token="+bearer_token, '_blank');
+        var win = window.open($('.file[data-file-id="'+id+'"]').data("file-url")+"?token="+Session.token, '_blank');
         win.focus();
     }
     
@@ -258,10 +298,10 @@
         },10);
     }
 
-    fakeLogin();
 
-    
 
+
+main();
 
     
 

@@ -379,6 +379,19 @@ body
     background-size: cover;
 }
 
+.app-root
+{
+    display: none;
+}
+
+.app-login
+{
+    display: none;
+    background-color:#00000010;
+    width: 100vw;
+    height: 100vh;
+}
+
 .fake-bottom
 {
     float:left;
@@ -690,6 +703,15 @@ input.thin-box
 
 }
 
+
+.login-box
+{
+    width:320px;
+    padding:1rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    margin:auto;
+}
 
 .modal-backdrop
 {
